@@ -1,0 +1,239 @@
+{% extends "FrontendBundle::base.html.twig" %}
+
+{% block container %}
+<div class="row margin-bottom-40">
+    
+    <div class="sidebar col-md-3 col-sm-5">
+        {{ render(controller('FrontendBundle:Widgets:getFilterWidget' )) }}      
+        {{ render(controller('FrontendBundle:Widgets:getLatestRidesWidget' )) }}
+    </div>
+    
+    <div class="col-md-9 col-sm-7">
+        <div class="content-form-page">
+            <h1 class="ar">
+                قدم توصيله				
+            </h1>
+                
+            {% if not form.vars.valid %}
+                <div class="note note-danger">
+                    {{form_errors(form)}}
+                    {{form_errors(form.rideFrom)}}
+                    {{form_errors(form.rideTo)}}    
+                    {{form_errors(form.stopOver)}}
+                    {{form_errors(form.departureDate)}}
+                    {{form_errors(form.returnDate)}}
+                    {{form_errors(form.price)}}
+                    {{form_errors(form.availableSeats)}}
+                    {{form_errors(form.womenOnly)}}
+                    {{form_errors(form.notes)}} 
+                </div>                
+            {% endif %}                
+            <form role="form" action="{{ path('create_offerRide') }}" method="post" class="form-horizontal form-without-legend">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>	
+                    <div class="col-lg-8">				
+                        <div class="radio-list">
+                            {% for rideType in form.rideType %}
+                                 {% set index = rideType.vars.value %}
+                                     <label class="radio-inline ar">
+                                        {{ form_widget(rideType) }}                                               
+                                        {{ form_label(rideType) }}
+                                     </label>&nbsp;
+                             {% endfor %}                             
+                        </div>
+                    </div>
+                </div>				  
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> من<span class="require"> *</span></label>
+                    <div class="col-lg-8">
+                        <div class="input-group ar" style="padding-bottom:10px">  
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-map-marker" style="color:green"></i>
+                            </span>  
+                            {{ form_widget(form.rideFrom,{'attr': {
+                                    'class': 'form-control select2me ar',
+                            },'empty_value': '-- اختر مكان المغادرة --' }) }} 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> الي <span class="require">*</span></label>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-map-marker" style="color:red"></i>
+                            </span>                            
+                            {{ form_widget(form.rideTo,{'attr': {
+                                    'class': 'form-control select2me ar',
+                            },'empty_value': '-- اختر مكان الوصول --' }) }}                                                      
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar">
+                        مناطق فى طريقك
+
+                    </label>
+                    <div class="col-lg-8">
+                            {{ form_widget(form.stopOver,{'attr': {
+                                    'class': 'form-control tags',
+                            } }) }}                                                
+                        <p class="help-block ar" style="font-size:11px;">
+                             ادخل المناطق الرئيسية التي سوف تمر من خلالها ثم اضغط  Enter 
+                        </p>                    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar" > تاريخ المغادرة <span class="require">*</span></label>
+                    <div class="col-lg-8">
+                        <div class="input-group date form_datetime">
+                            {{ form_widget(form.departureDate,{'attr': {
+                                    'class': 'form-control',
+                                    'readonly': 'readonly'
+                            } }) }}   
+                            <span class="input-group-btn">
+                                <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>	
+                    <div class="col-lg-8">				
+                        <div class="checkbox-list">
+                            <label class="ar">
+                                <input type="checkbox" name="roundTrip" id="round-trip"> 
+                                ذهاب وعودة
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="round-trip-row" style="display: none;">
+                    <label class="col-lg-2 control-label ar"> تاريخ العودة  </label>
+                    <div class="col-lg-8">
+                        <div class="input-group date form_datetime">
+                            {{ form_widget(form.returnDate,{'attr': {
+                                    'class': 'form-control',
+                                    'readonly': 'readonly'
+                            } }) }}  
+                            <span class="input-group-btn">
+                                <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label ar"> اجرة الراكب </label>
+                    <div class="col-md-8">
+                        {{ form_widget(form.price,{'attr': {
+                                'class': 'form-control'
+                        } }) }}  
+                        <p class="help-block ar" style="font-size:11px;">
+                             جنيه مصري
+                        </p>                              
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label ar"> عدد المقاعد  </label>
+                    <div class="col-md-8">
+                        {{ form_widget(form.availableSeats,{'attr': {
+                                'class': 'form-control'
+                        } }) }}                                             
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>	
+                    <div class="col-lg-8">				
+                        <div class="checkbox-list">
+                            <label class="ar">
+                                {{ form_widget(form.womenOnly) }}                                  
+للنساء فقط                                
+                            </label>
+                        </div>
+                    </div>
+                </div>                    
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> ملاحظات </label>
+                    <div class="col-lg-8">
+                        {{ form_widget(form.notes,{'attr': {
+                                'class': 'form-control',
+                                'rows': '6'
+                        } }) }}                          
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"></label>	
+                    <div class="col-lg-8">				
+                        <div class="checkbox-list">
+                            <label class="ar">
+                                {{ form_widget(form.xterms) }} 
+                                أقر بأني أحمل رخصة قيادة سارية المفعول
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {{ form_widget(form) }}
+                <div class="row">
+                    <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                        <button class="btn btn-primary ar" type="submit">
+                            نشر
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>	
+{% endblock %}
+
+{% block page_level_styles %}
+    <link href="{{ asset('bundles/layout/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel-rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/smoothness/jquery-ui.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/rateit/src/rateit.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput-rtl.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css') }}" rel="stylesheet" type="text/css">         
+{% endblock %}
+
+{% block page_level_script %}
+    
+    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/admin/pages/scripts/components-pickers.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}" type="text/javascript"></script>                   
+{% endblock %}   
+
+{% block documentReady %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init(); // init current layout
+            Metronic.init();
+            ComponentsPickers.init();
+            Layout.initUniform();
+            $('.tags').tagsInput({
+                width: 'auto',
+                'defaultText': '',
+                'onAddTag': function() {
+                    //alert(1);
+                },
+            });
+            
+            
+            $("#round-trip").click(function(){
+                var isChecked = $('#round-trip').is(':checked'); 
+                if(isChecked === true){
+                    $('#round-trip-row').show();                    
+                }
+                else{
+                    $('#round-trip-row').hide();                    
+                }
+                
+            });
+
+        });
+        </script>
+{% endblock %}    

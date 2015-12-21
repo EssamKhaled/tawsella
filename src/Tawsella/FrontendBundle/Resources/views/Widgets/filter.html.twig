@@ -1,0 +1,127 @@
+  <div class="sidebar-filter margin-bottom-25 hidden-sm hidden-xs">
+            <div class="row">
+                <form action="{{ path('offer-ride-search-filter') }}" method="get">
+                    
+                    <div class="col-md-12">
+                        <div class="input-group ar" style="padding-bottom:10px">
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-map-marker" style="position:initial;color:green"></i>
+                            </span>
+                            <select name="rideFrom" class="form-control select2me ar" data-placeholder="من">
+                                <option class="ar" value=" ">من</option>
+                                {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                            </select>
+                        </div>                        
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group" style="padding-bottom:10px">
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-map-marker" style="position:initial;color:#e6400c"></i>
+                            </span>
+                            <select name="rideTo" class="form-control select2me ar" data-placeholder="الي">
+                                <option class="ar" value=" ">الي</option>
+                                {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12" style="display:none;">
+                        <h3 class="ar">
+                            التاريخ 									
+                        </h3>
+                        <div class="input-group" style="padding-bottom:10px">
+                            <input type="text"  class="form-control date-picker">
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>								
+                    <div class="col-md-12" style="display:none;">
+                        <div class="form-group">
+                            <div class="checkbox-list">
+                                <label>
+                                    <input type="checkbox"> 
+                                    <span class="ar">
+                                        بصورة للمستخدم													
+                                    </span>				  
+                                </label>
+                                <label>
+                                    <input type="checkbox"> 
+                                    <span class="ar">
+                                        للسيدات فقط														
+                                    </span>				  
+                                </label>
+                            </div>
+                        </div>									
+                    </div>
+                    <div class="col-md-12" style="display:none;">
+                        <div class="form-group">
+                            <label class="ar">السائق</label> &nbsp; :-
+                            <div class="radio-list" style="padding-right:15px">
+                                <label>
+                                    <input type="radio"  id="optionsRadios1" value="option1" checked> 
+                                    <span class="ar">
+                                        ذكر														
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio"  id="optionsRadios2" value="option2"> 
+                                    <span class="ar">
+                                        انثى														
+                                    </span>
+                                </label>										
+                            </div>
+                        </div>									
+                    </div>	
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="ar">عدد المقاعد</label> &nbsp; :-
+                            <div class="radio-list" style="padding-right:15px">
+                                <label>
+                                    <input type="radio" name="availableSeats" id="optionsRadios1" value="1" checked> 
+                                    <span class="ar">
+                                        مقعد واحد
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="availableSeats" id="optionsRadios2" value="2"> 
+                                    <span class="ar">
+                                        مقعدين													
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="availableSeats" id="optionsRadios3" value="3"> 
+                                    3
+                                    <span class="ar">
+                                        مقاعد
+                                    </span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="availableSeats" id="optionsRadios4" value="4"> 
+                                    4
+                                    <span class="ar">
+                                        مقاعد
+                                    </span>
+                                </label>																																
+                            </div>
+                        </div>									
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group move_left">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+
+                                    <span class="ar">
+                                        بحث									
+                                    </span>
+                                    <li class="fa fa-search"></li>								
+                                </button>
+                            </span>
+                        </div>                        
+                    </div>
+                
+
+                </form>	
+
+            </div>
+        </div>

@@ -1,0 +1,26 @@
+<div class="sidebar-products clearfix">
+    <h2 class="ar">اخر التوصيلات</h2>
+    {% for entity in entities %}
+        <div class="item latest-ride-item" {% if loop.last %}style="border-bottom:0px!important"{% endif %}>
+            <h3>
+                <a href="{{ path('offer-ride-more-details', { 'id': entity.id } ) }}">
+                    <span class="ar">
+                        من
+                        {{ entity.rideFrom.nameAr }}
+                    </span> |
+                    <span class="ar">
+                        الى
+                        {{ entity.rideTo.nameAr }}  
+                    </span>
+                                        
+                </a>
+            </h3>
+            <div class="price">
+                {{ entity.availableSeats }}
+                <span class="ar ar-11"> مقاعد متبقيه </span> |
+                {{ entity.price }}
+                <span class="ar ar-11"> جنيه للفرد </span>
+            </div>
+        </div>
+    {% endfor %}
+</div>

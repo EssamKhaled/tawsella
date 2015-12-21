@@ -1,0 +1,52 @@
+{% extends "FrontendBundle::base.html.twig" %}
+
+{% block container %}
+<div class="row margin-bottom-40">
+
+    <div class="sidebar col-md-3 col-sm-5">
+        {{ render(controller('FrontendBundle:Widgets:getFilterWidget' )) }}      
+        {{ render(controller('FrontendBundle:Widgets:getLatestRidesWidget' )) }}
+    </div>  
+    
+    <div class="col-md-9 col-sm-7">
+        <div class="note note-success">   
+            <h2 class="ar" style="color:#808080">
+            <li class="fa fa-check-circle fa-lg"></li>            
+            تم نشر توصيلتك بنجاح
+            </h2>
+            <h5 class="ar">شكرا لاستخدامك خدمة توصيله<br></h5>
+        </div>        
+    </div>	
+{% endblock %}
+
+{% block page_level_styles %}
+    <link href="{{ asset('bundles/layout/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel-rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/smoothness/jquery-ui.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/rateit/src/rateit.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput-rtl.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css') }}" rel="stylesheet" type="text/css">         
+{% endblock %}
+
+{% block page_level_script %}
+    
+    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/admin/pages/scripts/components-pickers.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}" type="text/javascript"></script>                   
+{% endblock %}   
+
+{% block documentReady %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init(); // init current layout
+            Metronic.init();
+            ComponentsPickers.init();
+            Layout.initUniform();
+        });
+        </script>
+{% endblock %}    

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Ride From cannot be empty</source>
+                <target>من فضلك قم بادخال مكان التوصيله (من)</target>
+            </trans-unit>
+           <trans-unit id="2">
+                <source>Ride To cannot be empty</source>
+                <target>من فضلك قم بادخال مكان التوصيله (الى)</target>
+            </trans-unit>
+           <trans-unit id="3">
+                <source>Departure Date cannot be empty</source>
+                <target>من فضلك قم بادخال تاريخ المغادرة </target>
+            </trans-unit>
+           <trans-unit id="4">
+                <source>Price cannot be empty</source>
+                <target>من فضلك قم بادخال اجرة الراكب</target>
+            </trans-unit>
+           <trans-unit id="5">
+                <source>Available Seats cannot be empty</source>
+                <target>من فضلك قم بادخال عدد المقاعد</target>
+            </trans-unit>
+           <trans-unit id="6">
+                <source>Ride Type cannot be empty</source>
+                <target>من فضلك قم بادخال نوع التوصيله</target>
+            </trans-unit>            
+        </body>
+    </file>
+</xliff>

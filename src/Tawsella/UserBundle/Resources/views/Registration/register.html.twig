@@ -1,0 +1,88 @@
+{% extends "FrontendBundle::landingLayout.html.twig" %}
+
+{% block layoutInputs %}
+<form role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="post">   
+    <h4 class="ar">
+        <i class="fa fa-lock"></i>&nbsp;
+        انشاء حساب جديد
+    </h4>    
+            {% if form_errors(form) %}
+    <div class="note note-danger">
+        <button class="close" data-dismiss="alert"></button>
+        <span class="ar">{{ form_errors(form) }}</span>
+    </div>
+            {% endif %}                 
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" style="padding-bottom:10px">                        
+                        {{ form_widget(form.username,{'attr': {
+                                'class': 'form-control ar',
+                                'placeholder': 'اسم المستخدم'
+                        } }) }}                            
+
+                    <span class="input-group-addon" style="background:#fff;">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group" style="padding-bottom:10px">                        
+                        {{ form_widget(form.email,{'attr': {
+                                'class': 'form-control ar',
+                                'placeholder': 'البريد الالكتروني'
+                        } }) }}                            
+
+                        <span class="input-group-addon" style="background:#fff;">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>                
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group" style="padding-bottom:10px">                        
+                        {{ form_widget(form.plainPassword.first,{'attr': {
+                                'class': 'form-control ar',
+                                'placeholder': 'كلمة المرور'
+                        } }) }}                            
+
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" style="padding-bottom:10px">                        
+                        {{ form_widget(form.plainPassword.second,{'attr': {
+                                'class': 'form-control ar',
+                                'placeholder': 'تأكيد'
+                        } }) }}                            
+
+                                <span class="input-group-addon" style="background:#fff;">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>  
+            {{ form_widget(form) }}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group move_left">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="_submit" name="_submit" type="submit">
+                                        <span class="ar">
+                                            انشاء
+                                        </span>								
+                                    </button>
+                                </span>
+                            </div>			
+                        </div>		
+                    </div>
+                </form>
+{% endblock %}

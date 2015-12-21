@@ -1,0 +1,187 @@
+{% extends "FrontendBundle::base.html.twig" %}
+
+{% block container %}
+<div class="row margin-bottom-40">
+
+    <div class="sidebar col-md-3 col-sm-5">
+        {{ render(controller('FrontendBundle:Widgets:getFilterWidget' )) }}      
+        {{ render(controller('FrontendBundle:Widgets:getLatestRidesWidget' )) }}
+    </div>  
+    <div class="col-md-9 col-sm-7">
+        <div class="content-search margin-bottom-20">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1 class="ar">
+                        نتائج البحث							
+                        &nbsp;<span class="number txt-color-orange" style="font-size:20px!important">( {{ pagination.getTotalItemCount }} )</span>
+                    </h1>
+                    {% if pagination.getTotalItemCount == 0 %}
+                        <br>
+                        <h5 class="ar">
+عفوا لا توجد توصيلات بهذا البحث                        
+                        </h5>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <form action="#">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-4"></div>	
+                        <div class="col-md-3" style="display: none;">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+
+                                        <span class="ar">
+                                            اطلب توصيله													
+                                        </span>
+                                        <li class="fa fa-bullhorn"></li>								
+                                    </button>
+                                </span>
+                            </div>			
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+                      
+            <div class="row product-list">
+                
+                {% for entity in pagination %}
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="product-item">
+                            <div class="sidebar-products clearfix no-padding">
+                                <h2 class="ar">
+                                    {% if entity.user.accountInfo.firstName != null %}
+                                        {{ entity.user.accountInfo.firstName }} {{ entity.user.accountInfo.lastName }}                                        
+                                    {% else %}
+                                        {{ app.user }} 
+                                    {% endif %}
+    
+                                </h2>
+                                <div class="item">
+                                    <a href="{{ path('offer-ride-more-details', { 'id': entity.id } ) }}">
+                                        <img src="{% if entity.user.accountInfo.image == null %}{{ asset('bundles/layout/assets/frontend/pages/img/user-man-driver-72.png') }}{% else %}{{ asset('uploads/account_info/') }}{{ entity.user.accountInfo.image }}{% endif %}" alt=""/>
+                                    </a>
+                                    <h3 style="margin-top: -9px;margin-right: 80px!important;">
+                                         {{ "now"|date('Y')-entity.user.accountInfo.dateOfBirth[6:] }}
+                                        <span class="ar">
+                                            سنه										
+                                        </span>
+                                    </h3>
+                                    <div class="price" style="margin-right: 80px!important;display: none;">
+                                        <li class="fa fa-star-o"></li>
+                                        <li class="fa fa-star-o"></li>
+                                        <li class="fa fa-star"></li>
+                                        <li class="fa fa-star"></li>
+                                        <li class="fa fa-star"></li>
+                                    </div>
+                                    <div class="">
+                                        <span class="{% if entity.user.accountInfo.smoking == false %}no-{% endif %}smoking prefs tip"></span>
+                                        <span class="{% if entity.user.accountInfo.pets == false %}no-{% endif %}pet prefs tip"></span>
+                                        <span class="{% if entity.user.accountInfo.music == false %}no-{% endif %}music prefs tip"></span>
+                                    </div>
+                                </div>
+                            </div>				
+                            <h3>
+                                {{ entity.departureDate }}
+                            </h3>
+                            <div style="margin-top:-10px">
+                                <li class="fa fa-map-marker" style="color:green"></li>&nbsp;
+                                <span class="ar">
+                                    من							
+                                </span>:&nbsp;
+                                {{ entity.rideFrom.nameAr }} &nbsp;
+                            </div>
+                            <div>
+                                <li class="fa fa-map-marker" style="color:red"></li>&nbsp;
+                                <span class="ar">
+                                    الي						
+                                </span>:&nbsp;
+                                {{ entity.rideTo.nameAr }} &nbsp;
+                            </div>
+                            
+                            <h3 class="txt-color-orange">
+                                <li class="fa fa-car"></li> 
+                                {{ entity.user.accountInfo.carType }}
+                            </h3>
+                            <div style="margin-top:-10px">
+                                {{ entity.availableSeats }}
+                                <span class="ar">
+                                    مقاعد متبقيه					
+                                </span>
+                            </div>					  					  		  
+                            <div class="pi-price">{{ entity.price }} <span class="ar">جنيه للفرد</span></div>
+                            <a href="{{ path('offer-ride-more-details', { 'id': entity.id } ) }}" class="btn btn-default add2cart ar">
+                                المزيد								
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+      
+
+            </div>            
+            <div class="row">
+                <div class="col-md-4 col-sm-4 items-info number"></div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="pagination pull-right number">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>   
+    </div>
+
+{% endblock %}
+    
+
+{% block page_level_styles %}
+    <link href="{{ asset('bundles/layout/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel-rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/smoothness/jquery-ui.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/rateit/src/rateit.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput-rtl.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css') }}" rel="stylesheet" type="text/css">         
+{% endblock %}
+
+{% block page_level_script %}
+    
+    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/admin/pages/scripts/components-pickers.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}" type="text/javascript"></script>                   
+{% endblock %}   
+
+{% block documentReady %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init(); // init current layout
+            Metronic.init();
+            ComponentsPickers.init();
+            Layout.initUniform();
+            $('.tags').tagsInput({
+                width: 'auto',
+                'defaultText': '',
+                'onAddTag': function() {
+                    //alert(1);
+                },
+            });
+            
+            
+            $("#round-trip").click(function(){
+                var isChecked = $('#round-trip').is(':checked'); 
+                if(isChecked === true){
+                    $('#round-trip-row').show();                    
+                }
+                else{
+                    $('#round-trip-row').hide();                    
+                }
+                
+            });
+
+        });
+        </script>
+{% endblock %}        

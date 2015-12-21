@@ -1,0 +1,73 @@
+{% extends "FrontendBundle::base.html.twig" %}
+
+{% block container %}
+<div class="row margin-bottom-40 ">
+    <div class="col-md-4 col-sm-4">
+        {% block layoutInputs %}{% endblock %}
+    </div>
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <img src="{{ asset('bundles/layout/assets/frontend/pages/img/car-share.png') }}" alt="Tawsella" style="width:210px;" class="responsive">	
+                <br><br>			  	
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <h1 class="txt-color-orange ar">
+                    محتاج توصيله ؟							
+                </h1>
+                <p class="ar">
+                    تعبت من كتر المواصلات وانت رايح شغلك او مشوارك؟
+                </p>
+                <p class="ar">
+                    ولا تعبت من السواقة وزهقت من الزحام ودماغك تعبت من التفكير والتركيز في الطريق                          
+                </p>
+                <p class="ar">
+                    ولا عندك عربية ومصاريفها كترت عليك وعندك كراسي زيادة؟                          
+                </p>
+                <p class="ar">
+                    قدم توصيله وخد اشخاص موثوق فيهم يشاركوك الطريق, او دور علي توصيله وهتلاقي اشخاص رايحين نفس مشوارك
+                </p>
+            </div>				  
+        </div>
+    </div>
+</div>
+<div class="row service-box">
+    <div class="col-md-4 col-sm-4">
+        <div class="service-box-heading">
+            <em><i class="fa fa-dollar blue"></i></em>
+            <span class="ar">
+                وفر فلوسك ووقتك
+            </span>
+        </div>
+        <p class="ar">
+            سواء كنت صاحب عربية او عايز تروح مشوار وبتركب اكتر من مواصلة
+            <br>
+            توصيله هتوفرلك فلوسك ووقتك وجهدك لانها ارخص واسرع من الاتوبيس والقطار والميكروباص                  
+        </p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <div class="service-box-heading">
+            <em><i class="fa fa-smile-o red"></i></em>
+            <span class="ar">
+                استمتع مع كل توصيله              	
+            </span>
+        </div>
+        <p class="ar">
+            هتتعرف علي اشخاص جدد من خلال توصيله وممكن تلاقي من بينهم اصحاب بجد
+            <br>
+            واكيد بدل ما بتكون لوحدك كل يوم هتكون سعيد لما تلاقي حد معاك بيشاركك المشوار
+        </p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <div class="service-box-heading">
+            <em><i class="fa fa-support green"></i></em>
+            <span class="ar">
+                شارك في دعم الاقتصاد
+            </span>
+        </div>
+        <p class="ar">
+            توصيله بتساهم في دعم الاقتصاد المصري من خلال توفير جزء من دعم الحكومة للبنزين نتيجة تقليل عدد العربيات في الطريق وكمية العوادم المنبعثة من العربيات وتصبح بيئة نظيفة بدون تلوث
+        </p>
+    </div>
+</div>
+{% endblock %}

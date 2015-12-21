@@ -1,0 +1,157 @@
+{% extends "LayoutBundle:Frontend:mainLayout.html.twig" %}
+
+{% block nav%} 
+    {% if not app.user %}       
+        <li {% if "/login" in app.request.uri %}class="active"{% endif %}>
+            <a href="{{ path('fos_user_security_login') }}" class="ar">
+                دخول 				  
+            </a>
+        </li>
+        <li {% if "/register" in app.request.uri %}class="active"{% endif %}>
+            <a href="{{ path('fos_user_registration_register') }}" class="ar">
+                مستخدم جديد  				  
+            </a>
+        </li> 
+    {% else %}
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">
+                {{ app.user }}            
+                <span class="fa fa-angle-down"></span>
+            </a>
+
+            <!-- BEGIN DROPDOWN MENU -->
+            <ul class="dropdown-menu">
+                <li {% if "/my-rides" in app.request.uri %}class="active"{% endif %}>
+                    <a href="{{ path('my-rides') }}" class="ar" style="font-size:10px!important">
+توصيلاتي المقدمة                    
+                    </a>                
+                </li>
+                <li {% if "/profile" in app.request.uri %}class="active"{% endif %}>
+                    <a href="{{ path('fos_user_profile_show') }}" class="ar" style="font-size:10px!important">
+الملف الشخصي                        
+                    </a>                 
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}" class="ar" style="font-size:10px!important">
+                        تسجل الخروج
+                    </a>                
+                </li>
+            </ul>
+            <!-- END DROPDOWN MENU -->
+        </li>        
+    {% endif %}
+    <li {% if "/offer-ride/new/" in app.request.uri %}class="active"{% endif %}>
+        <a href="{{ path('offer-ride') }}" class="ar">
+            قدم توصيله				
+        </a>
+    </li>
+    <li {% if "/offer-ride/available/" in app.request.uri %}class="active"{% endif %}>
+        <a href="{{ path('offer-ride-available') }}" class="ar">
+            التوصيلات المتاحة				
+        </a>
+    </li>    
+{% endblock %}
+
+{% block logout %}
+    {% if app.user %}
+        <li class="langs-block">
+            <a href="javascript:void(0);" class="current">
+                {{ app.user }}            
+                <span class="fa fa-angle-down"></span>                
+            </a>
+            <div class="langs-block-others-wrapper">
+                <div class="langs-block-others">
+                    <a href="{{ path('my-rides') }}" class="ar {% if "/my-rides" in app.request.uri %}txt-color-orange{% endif %}" style="font-size:10px!important">
+توصيلاتي المقدمة                    
+                    </a>
+                    <a href="{{ path('fos_user_profile_show') }}" class="ar {% if "/profile" in app.request.uri %}txt-color-orange{% endif %}" style="font-size:10px!important">
+الملف الشخصي                        
+                    </a>                        
+                    <a href="{{ path('fos_user_security_logout') }}" class="ar" style="font-size:10px!important">
+                        تسجل الخروج
+                    </a>
+                </div>
+            </div>
+        </li>           
+    {% endif %}    
+{% endblock%}
+        
+{% block footer %}        
+    <div class="footer footer-light">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN COPYRIGHT -->
+                <div class="col-md-6 col-sm-6">
+                    {{ "now"|date('Y') }} © Tawsella.com. ALL Rights Reserved
+                </div>
+                <!-- END COPYRIGHT -->
+                <!-- BEGIN PAYMENTS -->
+                <div class="col-md-6 col-sm-6">
+                    <ul class="list-unstyled list-inline pull-right footer-social" style="padding-bottom: 0px;">                      
+                        <li><a href="https://www.facebook.com/tawsella" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>	
+                        <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                    </ul> 
+                    <ul class="list-unstyled list-inline pull-right footer-social">
+                        <li>
+                            <a href="" class="ar ar-11">
+                                شروط الإستخدام								
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="ar ar-11">
+                                الاسئلة الشائعة									
+                            </a>
+                        </li>
+                        <li class="footer-social-sep">
+                            <a href="" class="ar ar-11">
+                                حول الموقع								
+                            </a>
+                        </li> 
+                    </ul>                      
+                </div>
+                <!-- END PAYMENTS -->
+            </div>
+        </div>
+    </div>    
+{% endblock%}  
+
+{% block searchBox %}
+    
+        
+    <div class="search-box" style="width:315px;">
+        <form role="form" action="{{ path('offer-ride-search-result') }}" method="get" >
+            <div class="input-group ar" style="padding-bottom:10px">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-map-marker" style="position:initial;color:green"></i>
+                </span>
+                <select name="rideFrom" class="form-control select2me ar" data-placeholder="من">
+                    <option class="ar" value=" ">من</option>
+                    {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                </select>
+            </div>	
+            <div class="input-group" style="padding-bottom:10px">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-map-marker" style="position:initial;color:#e6400c"></i>
+                </span>
+                <select name="rideTo" class="form-control select2me ar" data-placeholder="الي">
+                    <option class="ar" value=" ">الي</option>
+                    {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                </select>
+            </div>										
+            <div class="input-group move_left">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">
+
+                        <span class="ar">
+                            بحث									
+                        </span>
+                        <li class="fa fa-search"></li>								
+                    </button>
+                </span>
+            </div>				  			  
+        </form>
+    </div>      
+{% endblock %}                 
+           

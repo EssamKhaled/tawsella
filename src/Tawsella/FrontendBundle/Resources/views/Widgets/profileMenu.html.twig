@@ -1,0 +1,5 @@
+<ul class="list-group margin-bottom-25 sidebar-menu">
+    <li class="list-group-item clearfix {% if "fos_user_profile_show" == route %}active{% endif %}"><a href="{{ path('fos_user_profile_show') }}" class="ar"><i class="fa fa-angle-right"></i> الرئيسية</a></li>
+    <li class="list-group-item clearfix {% if "fos_user_profile_edit" == route  or "fos_user_change_password" == route %}active{% endif %}"><a href="{{ path('fos_user_profile_edit') }}" class="ar"><i class="fa fa-angle-right"></i> بيانات حسابك</a></li>            
+    <li class="list-group-item clearfix {% if "account-info-edit" == route %}active{% endif %}"><a href="{{ path('account-info-edit') }}" class="ar"><i class="fa fa-angle-right"></i> بيانات شخصية</a></li>            
+</ul>   

@@ -1,0 +1,52 @@
+{% extends "FrontendBundle::landingLayout.html.twig" %}
+
+{% block layoutInputs %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+<form role="form" action="{{ path("fos_user_security_check") }}" method="post">   
+    <h4 class="ar">
+        <i class="fa fa-lock"></i>&nbsp;
+        الدخول الى حسابك الشخصى            
+    </h4>
+    {% if error %}
+        <div class="note note-danger">
+            <button class="close" data-dismiss="alert"></button>
+            <span class="ar">{{ error|trans }}</span>
+        </div>
+    {% endif %}         
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" style="padding-bottom:10px">
+                <input type="text" name="_username" autocomplete="off" class="form-control ar" placeholder="البريد الالكتروني">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-user"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">  
+        <div class="col-md-12">
+            <div class="input-group" style="padding-bottom:10px">
+                <input type="password" name="_password" autocomplete="off" class="form-control ar" placeholder="كلمة المرور">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group move_left">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="_submit" name="_submit" type="submit">
+                        <span class="ar">
+                            دخول
+                        </span>								
+                    </button>
+                </span>
+            </div>			
+        </div>		
+    </div>
+</form>
+{% endblock %}

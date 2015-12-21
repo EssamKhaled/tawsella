@@ -1,0 +1,53 @@
+{% extends "FrontendBundle::landingLayout.html.twig" %}
+
+{% block layoutInputs %}
+<form role="form" action="{{ path('offer-ride-search-result') }}" method="get" >
+    <h4 class="ar">
+        <i class="fa fa-search"></i>&nbsp;
+        ابحث عن توصيله
+    </h4>    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group ar" style="padding-bottom:10px">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-map-marker" style="position:initial;color:green"></i>
+                </span>
+                <select name="rideFrom" class="form-control select2me ar" data-placeholder="من">
+                    <option class="ar" value=" ">من</option>
+                    {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" style="padding-bottom:10px">
+                <span class="input-group-addon" style="background:#fff;">
+                    <i class="fa fa-map-marker" style="position:initial;color:#e6400c"></i>
+                </span>
+                <select name="rideTo" class="form-control select2me ar" data-placeholder="الي">
+                    <option class="ar" value=" ">الي</option>
+                    {{ render(controller('FrontendBundle:Widgets:getCitiesWidget' )) }}
+                </select>
+            </div>
+        </div>            
+    </div>				
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group move_left">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">
+
+                        <span class="ar">
+                            بحث									
+                        </span>
+                        <li class="fa fa-search"></li>								
+                    </button>
+                </span>
+            </div>			
+        </div>		
+    </div>
+    <!-- /.row -->
+</form>
+{% endblock %}
+     

@@ -1,0 +1,128 @@
+{# Main Frontend Layout #}
+
+{% extends "::base.html.twig" %}
+
+{% block html_tags %}
+    <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+    <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+    <!--[if !IE]><!-->
+    <html lang="en"><!--<![
+    <!--<![endif]-->
+{% endblock %}
+        
+{% block metas %}  
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="قدم توصيله وخد اشخاص موثوق فيهم يشاركوك الطريق, او دور علي توصيله وهتلاقي اشخاص رايحين نفس مشوارك" name="description">
+    <meta content="توصيله,car share,car pooling,car sharing" name="keywords">
+    <meta content="Essam-Khaled" name="author">
+
+    <meta property="og:site_name" content="Tawsella">
+    <meta property="og:title" content="استمتع مع كل توصيله">
+    <meta property="og:description" content="قدم توصيله وخد اشخاص موثوق فيهم يشاركوك الطريق, او دور علي توصيله وهتلاقي اشخاص رايحين نفس مشوارك">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://tawsella.com/bundles/layout/assets/frontend/layout/img/logos/logo-shop-orange.jpg"><!-- link to image for socio -->
+    <meta property="og:url" content="http://tawsella.com/">
+{% endblock %}        
+    
+{% block title %} Tawsella {% endblock %}    
+
+{% block stylesheets %}
+
+    <!-- Global styles START --> 
+    <link href="{{ asset('bundles/layout/assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css') }}" rel="stylesheet">
+    <!-- Global styles END --> 
+   
+    <!-- Page level plugin styles START -->
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-select/bootstrap-select-rtl.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/select2/select2-rtl.css') }}" rel="stylesheet">    
+    {% block page_level_styles %}{% endblock %}
+    <!-- Page level plugin styles END -->
+
+    <!-- Theme styles START -->
+    <link href="{{ asset('bundles/layout/assets/global/css/components-rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/css/plugins-rtl.css') }}" rel="stylesheet" type="text/css"/>  
+    <link href="{{ asset('bundles/layout/assets/frontend/layout/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/style-shop.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/style-layer-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/frontend/layout/css/style-responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/frontend/layout/css/themes/orange.css') }}" rel="stylesheet" id="style-color">
+    <link href="{{ asset('bundles/layout/assets/frontend/layout/css/custom.css') }}" rel="stylesheet">
+    <!-- Theme styles END -->
+{% endblock %}  
+    
+{% block body_tags %}class="ecommerce"{% endblock %}
+    
+{% block body %}   
+  <!-- BEGIN HEADER -->
+  <div class="header">
+      <div class="container">
+          <a class="site-logo" href="{{ path('home') }}"><img src="{{ asset('bundles/layout/assets/frontend/layout/img/logos/logo-shop-orange.jpg') }}" alt="Tawsella"></a>
+
+          <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+          <!-- BEGIN CART -->
+          <!--END CART -->
+
+          <!-- BEGIN NAVIGATION -->
+          <div class="header-navigation">
+              <ul>
+                  {% block nav %} {% endblock %}
+
+                  <!-- BEGIN TOP SEARCH -->
+                  <li class="menu-search">
+                      <span class="sep"></span>
+                      <i class="fa fa-search search-btn"></i>
+                      {% block searchBox %}{% endblock %}
+                  </li>
+                  <!-- END TOP SEARCH -->
+              </ul>
+          </div>
+          <!-- END NAVIGATION -->
+      </div>
+  </div>
+  <!-- Header END -->
+
+  <div class="main">
+      <div class="container">
+          {% block container %}{% endblock %}
+      </div>
+  </div>
+  {% block footer %} {% endblock %}
+
+{% endblock %}  
+  
+    
+{% block javascripts %}       
+
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/respond.min.js') }}"></script>  
+    <![endif]-->
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-1.11.0.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>        
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>           
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="{{ asset('bundles/layout/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/frontend/layout/scripts/layout.js') }}" type="text/javascript"></script> 
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/select2/select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>
+    
+    {% block page_level_script %}{% endblock %}
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+{% endblock %} 
+    
+{% block documentReady %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Metronic.init();
+            Layout.init();      
+        });
+    </script>
+{% endblock %}    
+   

@@ -1,0 +1,302 @@
+{% extends "FrontendBundle::base.html.twig" %}
+
+{% block container %}
+<div class="row margin-bottom-40">
+    
+    <div class="sidebar col-md-3 col-sm-5">
+        {{ render(controller('FrontendBundle:Widgets:getProfileMenuWidget', {'route': app.request.attributes.get('_route') } )) }}              
+        {{ render(controller('FrontendBundle:Widgets:getLatestRidesWidget' )) }}
+    </div>
+    
+    <div class="col-md-9 col-sm-7">
+        <form action="{{ path('account-info-update') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+            <div class="content-form-page padding-top-20">
+                {% if not form.vars.valid %}                  
+                    <div class="note note-danger ar">
+                        {{form_errors(form)}}
+                        {{form_errors(form.firstName)}}    
+                    </div>    
+                {% endif %} 
+
+                <!-------- (Messages) --------------->
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="note note-success ar">                    
+                        {{ flashMessage|trans }}
+                    </div> 
+                {% endfor %}
+                <!-------- (End Messages) ---------->
+
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> الاسم الاول </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.firstName,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> الاسم الاخير </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.lastName,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> تاريخ الميلاد</label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.dateOfBirth,{'attr': {
+                                    'class': 'form-control date-picker'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> نوع السيارة</label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.carType,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-car"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> رقم الجوال  </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.mobile,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="content-form-page padding-top-20">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> رابط الفيس بوك  </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.facebookUrl,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> رابط تويتر </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.twitterUrl,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> رابط جوجل بلس </label>
+                    <div class="col-lg-8">
+                        <div class="input-group" style="padding-bottom:10px">                            
+                            {{ form_widget(form.googlePlusUrl,{'attr': {
+                                    'class': 'form-control'
+                            } }) }}                             
+                            <span class="input-group-addon" style="background:#fff;">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>                 
+            </div>
+            <br>
+            <div class="content-form-page padding-top-20">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar">الموسيقى </label>
+                    <div class="col-lg-1"><span class="music prefs tip"></span></div>
+                    <div class="col-lg-8">
+                        <div class="radio-list">
+                            {% for music in form.music %}
+                                 {% set index = music.vars.value %}
+                                     <label class="radio-inline ar">
+                                        {{ form_widget(music) }}                                               
+                                        {{ form_label(music) }}
+                                     </label>&nbsp;
+                             {% endfor %}                             
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> القطط او الكلاب </label>
+                    <div class="col-lg-1"><span class="pet prefs tip"></span></div>
+                    <div class="col-lg-8">
+                        <div class="radio-list">
+                            {% for pets in form.pets %}
+                                 {% set index = pets.vars.value %}
+                                     <label class="radio-inline ar">
+                                        {{ form_widget(pets) }}                                               
+                                        {{ form_label(pets) }}
+                                     </label>&nbsp;
+                             {% endfor %}                             
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar"> التدخين </label>
+                    <div class="col-lg-1"><span class="smoking prefs tip"></span></div>                    
+                    <div class="col-lg-4">
+                        <div class="radio-list">
+                            {% for smoking in form.smoking %}
+                                 {% set index = smoking.vars.value %}
+                                     <label class="radio-inline ar">
+                                        {{ form_widget(smoking) }}                                               
+                                        {{ form_label(smoking) }}
+                                     </label>&nbsp;
+                             {% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>                 
+            </div>
+            <br>
+            <div class="content-form-page padding-top-20" style="display: none;">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label ar">صورتك الشخصية</label>
+                    <div class="col-lg-8">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="{% if entity.image == null %}{{ asset('bundles/layout/assets/frontend/pages/img/no-image.jpg') }}{% else %}{{ asset('uploads/account_info/') }}{{ entity.image }}{% endif %}" alt=""/>
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new ar">
+                                        اختر صورتك الشخصية
+                                    </span>
+                                    <span class="fileinput-exists ar">
+                                        تغيير 
+                                    </span>
+                                    {{ form_widget(form.image) }}
+                                </span>
+                                <a href="#" class="btn red fileinput-exists ar" data-dismiss="fileinput">
+                                    حذف
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <div class="label label-danger ar">
+                                ملحوظة
+                            </div>
+                            <br>
+                            <div class="ar padding-top-10">
+                                من فضلك تاكد من ان وجهك يمكن التعرف عليه (بدون نظارات) للصور الخاصة بك لتتم الموافقة عليها.
+                                <br>
+                                 تأكد من تحميل ملف PNG أو JPG. 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-form-page padding-top-20">
+                {{ form_widget(form) }}
+                <div class="form-group">
+                    <div class="col-lg-8 col-md-offset-2">
+                        <button class="btn btn-primary pull-right ar" style="margin-left: 15px;" type="submit">
+                            تحديث
+                        </button>
+                    </div>
+                </div>             
+            </div>
+                
+           
+            </form>
+
+
+
+        
+    </div>
+</div>    
+{% endblock %}
+
+{% block page_level_styles %}
+    <link href="{{ asset('bundles/layout/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel-rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/uniform/css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/frontend/pages/css/smoothness/jquery-ui.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/rateit/src/rateit.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput-rtl.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css') }}" rel="stylesheet" type="text/css">         
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" type="text/css">             
+    <link href="{{ asset('bundles/layout/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page_level_script %}
+    
+    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/layout/assets/global/scripts/metronic.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/admin/pages/scripts/components-pickers.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('bundles/layout/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>               
+    <script src="{{ asset('bundles/layout/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}" type="text/javascript"></script>                   
+    <script src="{{ asset('bundles/layout/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}" type="text/javascript" ></script>
+
+    
+{% endblock %}   
+
+{% block documentReady %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init(); // init current layout
+            Metronic.init();
+            ComponentsPickers.init();
+            Layout.initUniform();
+            $('.tags').tagsInput({
+                width: 'auto',
+                'defaultText': '',
+                'onAddTag': function() {
+                    //alert(1);
+                },
+            });
+            
+            
+            $("#round-trip").click(function(){
+                var isChecked = $('#round-trip').is(':checked'); 
+                if(isChecked === true){
+                    $('#round-trip-row').show();                    
+                }
+                else{
+                    $('#round-trip-row').hide();                    
+                }
+                
+            });
+
+        });
+        </script>
+{% endblock %}    

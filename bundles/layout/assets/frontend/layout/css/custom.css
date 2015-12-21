@@ -1,0 +1,177 @@
+@font-face{
+    font-family: 'ge_ss_two_bold'; 
+    src:url('../fonts/ge_ss_two_bold/ge_ss_two_bold.eot?') format('embedded-opentype');
+    src:local(' '),
+         url('../fonts/ge_ss_two_bold/ge_ss_two_bold.ttf') format('truetype'),
+         url('../fonts/ge_ss_two_bold/ge_ss_two_bold.svg#GESSTwoBold-Bold') format('svg'),
+          url('../fonts/ge_ss_two_bold/ge_ss_two_bold.woff') format('woff'),
+
+          url('../fonts/ge_ss_two_light/ge_ss_Two_Bold.otf') format('opentype');
+    font-weight:lighter;
+    font-style: normal;
+}
+
+/*ge_ss_two_medium*/
+@font-face{
+    font-family: 'ge_ss_two_medium';
+    src:url('../fonts/ge_ss_two_medium/ge_ss_two_medium.eot?') format('embedded-opentype');
+    src:local(' '),
+        url('../fonts/ge_ss_two_medium/ge_ss_two_medium.svg#GESSTwoMedium-Medium') format('svg'),
+          url('../fonts/ge_ss_two_medium/ge_ss_two_medium.ttf') format('truetype'),
+          url('../fonts/ge_ss_two_medium/ge_ss_two_medium.woff') format('woff'),
+          url('../fonts/ge_ss_two_medium/ge_ss_Two_Medium.otf') format('opentype');
+    font-weight:normal;
+    font-style: normal;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+}
+.main{
+    padding-bottom: 50px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 6px;
+    padding-bottom: 30px;
+}
+.footer-social li {
+    padding-right: 11px;
+    padding-left: 15px;
+    border-left: solid 1px #d8d8d8;
+}
+.footer-social-sep {
+    padding-right: 11px!important;
+    padding-left: 15px!important;
+    border-left: solid 1px #d8d8d8!important;
+}
+.footer-social li:last-child {
+    border: none;
+}
+.footer a {
+    text-decoration: blink!important;
+}
+
+
+a {
+	color: #e18604;
+	font: 400 13px 'Open Sans', Arial, sans-serif!important;	
+}
+.ar {
+  font-family: 'ge_ss_two_medium',tahoma,Helvetica,Arial,sans-serif!important;
+}
+.ar-11{
+	font-size: 11px!important;
+}
+.number{
+	font: 400 13px 'Open Sans', Arial, sans-serif!important;	
+}
+.txt-color-orange{
+	color:#e18604!important;
+}
+.move_right{
+	text-align: right!important;	
+}
+.move_left{
+	text-align: left!important;	
+}
+.prefs {
+	display: block;
+	float: left;
+	height: 26px;
+	width: 26px;
+	margin-right: 5px;
+	text-indent: -10000px;
+	background-image: url(http://du7dtrj7qz5as.cloudfront.net/images/icons/sprite-prefs.png);
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-position: 0 0;
+}
+.prefs.no-smoking {
+	background-position: 0 -260px;
+}
+.prefs.smoking {
+	background-position: 0 -156px;
+}
+.prefs.no-pet {
+	background-position: 0 -572px;
+}
+.prefs.pet {
+	background-position: 0 -468px;
+}
+.prefs.music {
+	background-position: 0 -312px;
+}
+.prefs.no-music {
+	background-position: 0 -416px;
+}
+.pagination > li > span, .pagination > li > span:hover {
+    background: #e18604;
+    color: #fff;
+}
+.product-page-cart {
+    border-bottom: 0px solid #f4f4f4; 
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+div.tagsinput span.tag {
+    background: #e18604;
+    color: white;
+    border: 0;
+    padding: 3px 6px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+element.style {
+    display: block;
+    top: 467px;
+    z-index: 10;
+}
+.datetimepicker.dropdown-menu {
+    padding: 5px;
+}
+.langs-block-others {
+    padding: 10px 10px 2px;
+    background: #F9F9F9;
+    z-index: 9999;
+    width: 111px;
+    display: none;
+    margin-top: 12px;
+    border-top: solid 2px #ea4c1d;
+    box-shadow: 5px 5px rgba(91, 91, 91, 0.2);
+    position: relative;
+    transition: opacity .3s ease-in-out;
+    -moz-transition: opacity .3s ease-in-out;
+    -webkit-transition: opacity .3s ease-in-out;
+}
+.sidebar-products h3 {
+    font: 300 13px 'Open Sans', sans-serif;
+    margin-bottom: 2px;
+    margin-right: 0px!important;
+}
+.sidebar-products .price {
+    margin-right: 0px!important;
+    color: #E84D1C;
+    font: 16px 'PT Sans Narrow', sans-serif;
+}
+.latest-ride-item{
+    border-bottom: 1px solid #E9E9E9!important;
+    padding-bottom: 10px!important;    
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #e18604!important;
+    border-color: #e18604!important;
+}
